@@ -1,25 +1,50 @@
-import { Stack } from 'expo-router'
+import { ClerkProvider, ClerkLoaded } from '@clerk/clerk-expo'
+import { tokenCache } from '@/cache'
+import { Stack, Slot } from 'expo-router'
 import './global.css'
-import { StatusBar } from 'react-native'
+
+const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!
+
+if (!publishableKey) {
+  throw new Error(
+    'Missing Publishable Key. Please set EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY in your .env'
+  )
+}
 
 export default function RootLayout() {
+  console.log('RootLayout hitting fisrt page')
+  console.log(publishableKey)
+
   return (
-    <>
-      <Stack>
-        <Stack.Screen
-          name='(tabs)'
-          options={{
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name='movies/[id]'
-          options={{
-            headerShown: false,
-          }}
-        />
-      </Stack>
-      {/* <StatusBar hidden={true} /> */}
-    </>
+    <ClerkProvider tokenCache={tokenCache} publishableKey={publishableKey}>
+      <ClerkLoaded>
+        <Stack screenOptions={{ headerShown: false }}>
+          {/* <Stack.Screen
+            name='(protected)/(tabs)'
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name='(protected)/movies/[id]'
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name='(auth)/signIn'
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name='(auth)/signUp'
+            options={{
+              headerShown: false,
+            }}
+          /> */}
+        </Stack>
+      </ClerkLoaded>
+    </ClerkProvider>
   )
 }
