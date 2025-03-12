@@ -3,7 +3,6 @@ import { View, Text, Image, ScrollView, TouchableOpacity } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5'
 import Feather from '@expo/vector-icons/Feather'
-import AntDesign from '@expo/vector-icons/AntDesign'
 import ProfileSettingsItem from '@/components/ProfileSettingsItem'
 import { settings } from '@/constants/data'
 
