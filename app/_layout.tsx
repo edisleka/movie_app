@@ -12,9 +12,6 @@ if (!publishableKey) {
 }
 
 export default function RootLayout() {
-  console.log('RootLayout hitting fisrt page')
-  console.log(publishableKey)
-
   return (
     <ClerkProvider tokenCache={tokenCache} publishableKey={publishableKey}>
       <ClerkLoaded>

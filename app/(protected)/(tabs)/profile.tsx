@@ -5,8 +5,11 @@ import FontAwesome5 from '@expo/vector-icons/FontAwesome5'
 import Feather from '@expo/vector-icons/Feather'
 import ProfileSettingsItem from '@/components/ProfileSettingsItem'
 import { settings } from '@/constants/data'
+import { useAuth } from '@clerk/clerk-expo'
 
 const Profile = () => {
+  const { signOut } = useAuth()
+
   return (
     <SafeAreaView className='bg-primary flex-1 '>
       <ScrollView
@@ -46,7 +49,11 @@ const Profile = () => {
         </View>
 
         <View className='flex flex-col mt-5 border-t pt-5 border-light-200'>
-          <ProfileSettingsItem icon={icons.logout} title='Logout' />
+          <ProfileSettingsItem
+            icon={icons.logout}
+            title='Logout'
+            onPress={() => signOut()}
+          />
         </View>
       </ScrollView>
     </SafeAreaView>
